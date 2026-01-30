@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODILAB - 관리자</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f5f7f6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(45, 157, 74, 0.1);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0px;
+            font-style: normal;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        .header-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .header-menu button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-menu button:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Layout */
+        .admin-container {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid #eee;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-menu button {
+            width: 100%;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .sidebar-menu button:hover {
+            background-color: #f9fdf9;
+            color: #2d9d4a;
+        }
+
+        .sidebar-menu button.active {
+            background-color: #f0f8f6;
+            color: #2d9d4a;
+            border-color: #2d9d4a;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .content-section {
+            display: none;
+            flex: 1;
+            flex-direction: row;
+            gap: 20px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-section.active {
+            display: flex;
+        }
+
+        /* Search Section */
+        .search-section {
+            width: 320px;
+            height: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 15px;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #2d9d4a;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 157, 74, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 9px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-search {
+            background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);
+            color: white;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(45, 157, 74, 0.3);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #2d9d4a;
+            border: 2px solid #2d9d4a;
+        }
+
+        .btn-reset:hover {
+            background: #2d9d4a;
+            color: white;
+        }
+
+        /* Student List */
+        .student-list {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .student-list-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 15px;
+        }
+
+        .student-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .student-item {
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .student-item:hover {
+            background-color: #f9fdf9;
+            border-color: #2d9d4a;
+            transform: translateX(5px);
+        }
+
+        .student-item.active {
+            background-color: #f0f8f6;
+            border-color: #2d9d4a;
+            border-left: 4px solid #2d9d4a;
+        }
+
+        .student-name {
+            font-weight: 700;
+            color: #2d9d4a;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .student-meta {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .student-capability {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2d9d4a;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pagination button, .pagination span {
+            padding: 6px 10px;
+            border: 1px solid #2d9d4a;
+            background: white;
+            color: #2d9d4a;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #2d9d4a;
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination span {
+            border: none;
+            cursor: default;
+        }
+
+        /* Management Section */
+        .management-section {
+            flex: 1;
+            height: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .management-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2d9d4a;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d9d4a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Dropdown */
+        .select-box {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #2d9d4a;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .select-box:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 157, 74, 0.1);
+        }
+
+        /* File Upload */
+        .file-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f9fdf9;
+            border-radius: 6px;
+            border-left: 4px solid #2d9d4a;
+        }
+
+        .file-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d9d4a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .file-input {
+            padding: 10px;
+            border: 2px dashed #2d9d4a;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 12px;
+            color: #2d9d4a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input:hover {
+            background: #f0f8f6;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-report {
+            background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);
+            color: white;
+        }
+
+        .btn-report:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(45, 157, 74, 0.3);
+        }
+
+        .btn-add {
+            background: #2d9d4a;
+            color: white;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(45, 157, 74, 0.3);
+        }
+
+        .btn-delete {
+            background: white;
+            color: #dc2626;
+            border: 2px solid #dc2626;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #888;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .search-section {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="main.html" class="logo">RODILAB</a>
+        <div class="header-menu">
+            <button onclick="window.location.href='main.html'">Dashboard</button>
+            <button onclick="window.location.href='admin.html'">관리자</button>
+        </div>
+    </header>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">관리 메뉴</div>
+            <ul class="sidebar-menu">
+                <li>
+                    <button class="active" onclick="switchTab('students')">수강생 관리</button>
+                </li>
+                <li>
+                    <button onclick="switchTab('groups')">그룹 관리</button>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- 수강생 관리 섹션 -->
+            <div id="students" class="content-section active">
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-title">수강생 검색</div>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="이름으로 검색...">
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-search" onclick="searchStudents()">검색</button>
+                        <button class="btn btn-reset" onclick="resetSearch()">초기화</button>
+                    </div>
+                    <div class="student-list">
+                        <div class="student-list-title">수강생 목록</div>
+                        <div class="student-items" id="studentItems"></div>
+                        <div class="pagination" id="pagination"></div>
+                    </div>
+                </div>
+
+                <!-- Management Section -->
+                <div class="management-section" id="managementSection">
+                    <div class="empty-state">
+                        수강생을 선택해주세요
+                    </div>
+                </div>
+            </div>
+
+            <!-- 그룹 관리 섹션 -->
+            <div id="groups" class="content-section">
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-title">그룹 검색</div>
+                    <div class="search-box">
+                        <input type="text" id="searchGroupInput" placeholder="그룹명으로 검색...">
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-search" onclick="searchGroups()">검색</button>
+                        <button class="btn btn-reset" onclick="resetGroupSearch()">초기화</button>
+                    </div>
+                    <div class="student-list">
+                        <div class="student-list-title">그룹 목록</div>
+                        <div class="student-items" id="groupItems"></div>
+                        <div class="pagination" id="groupPagination"></div>
+                    </div>
+                </div>
+
+                <!-- Management Section -->
+                <div class="management-section" id="groupManagementSection">
+                    <div class="empty-state">
+                        그룹을 선택해주세요
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 그룹 데이터
+        const groupsData = [
+            { 
+                id: 1, 
+                name: '1조', 
+                studentCount: 8, 
+                institution: '성남시청소년센터', 
+                avgCapability: '초중급',
+                location: '성남시 중원구',
+                avgAge: 71,
+                students: [
+                    { name: '김순남', age: 72, gender: '여자' },
+                    { name: '박영호', age: 68, gender: '남자' },
+                    { name: '이순희', age: 76, gender: '여자' },
+                    { name: '정수진', age: 70, gender: '남자' },
+                    { name: '최연희', age: 73, gender: '여자' },
+                    { name: '유은희', age: 70, gender: '여자' },
+                    { name: '김동진', age: 69, gender: '남자' },
+                    { name: '정미경', age: 67, gender: '여자' }
+                ]
+            },
+            { 
+                id: 2, 
+                name: '2조', 
+                studentCount: 6, 
+                institution: '수원시평생교육원', 
+                avgCapability: '초급',
+                location: '수원시 팔달구',
+                avgAge: 70,
+                students: [
+                    { name: '이미영', age: 75, gender: '여자' },
+                    { name: '박미옥', age: 74, gender: '여자' },
+                    { name: '김종환', age: 72, gender: '남자' },
+                    { name: '최영미', age: 68, gender: '여자' },
+                    { name: '이남희', age: 71, gender: '여자' },
+                    { name: '조용식', age: 69, gender: '남자' }
+                ]
+            },
+            { 
+                id: 3, 
+                name: '3조', 
+                studentCount: 7, 
+                institution: '인천시노인복지센터', 
+                avgCapability: '초중급',
+                location: '인천시 남동구',
+                avgAge: 72,
+                students: [
+                    { name: '문성배', age: 71, gender: '남자' },
+                    { name: '이재호', age: 73, gender: '남자' },
+                    { name: '김미라', age: 72, gender: '여자' },
+                    { name: '박점남', age: 70, gender: '여자' },
+                    { name: '송영훈', age: 74, gender: '남자' },
+                    { name: '이혜경', age: 69, gender: '여자' },
+                    { name: '최영숙', age: 71, gender: '여자' }
+                ]
+            }
+        ];
+
+        // 더미 데이터
+        const studentsData = [
+            { id: 1, name: '김순남', age: 72, gender: '여자', region: '성남시', phone: '010-1234-5678', capability: '초중금', group: '그룹 없음', teacher: '강세영', package: '1:1 8회차 패키지', progress: 6 },
+            { id: 2, name: '박영호', age: 68, gender: '남자', region: '서울시', phone: '010-2345-6789', capability: '초급', group: '3조', teacher: '이지현', package: '그룹 10회차 패키지', progress: 7 },
+            { id: 3, name: '이미영', age: 75, gender: '여자', region: '안양시', phone: '010-3456-7890', capability: '초급', group: '그룹 없음', teacher: '강세영', package: '1:1 5회차 패키지', progress: 3 },
+            { id: 4, name: '정수진', age: 70, gender: '남자', region: '의정부시', phone: '010-4567-8901', capability: '초중급', group: '1조', teacher: '박민준', package: '그룹 10회차 패키지', progress: 8 },
+            { id: 5, name: '최연희', age: 73, gender: '여자', region: '수원시', phone: '010-5678-9012', capability: '초급', group: '2조', teacher: '이지현', package: '1:1 8회차 패키지', progress: 5 },
+            { id: 6, name: '문성배', age: 71, gender: '남자', region: '성남시', phone: '010-6789-0123', capability: '초중급', group: '그룹 없음', teacher: '강세영', package: '그룹 10회차 패키지', progress: 9 },
+            { id: 7, name: '이순희', age: 76, gender: '여자', region: '서울시', phone: '010-7890-1234', capability: '초급', group: '1조', teacher: '박민준', package: '1:1 5회차 패키지', progress: 4 },
+            { id: 8, name: '김동진', age: 69, gender: '남자', region: '광명시', phone: '010-8901-2345', capability: '초중금', group: '그룹 없음', teacher: '이지현', package: '그룹 10회차 패키지', progress: 10 },
+            { id: 9, name: '박미옥', age: 74, gender: '여자', region: '인천시', phone: '010-9012-3456', capability: '초급', group: '3조', teacher: '강세영', package: '1:1 8회차 패키지', progress: 6 },
+            { id: 10, name: '유은희', age: 70, gender: '여자', region: '성남시', phone: '010-0123-4567', capability: '초중급', group: '2조', teacher: '박민준', package: '그룹 10회차 패키지', progress: 7 },
+            { id: 11, name: '김종환', age: 72, gender: '남자', region: '서울시', phone: '010-1111-1111', capability: '초급', group: '그룹 없음', teacher: '이지현', package: '1:1 5회차 패키지', progress: 2 },
+            { id: 12, name: '정미경', age: 67, gender: '여자', region: '수원시', phone: '010-2222-2222', capability: '초중급', group: '1조', teacher: '강세영', package: '그룹 10회차 패키지', progress: 8 }
+        ];
+
+        let filteredData = [...studentsData];
+        let filteredGroups = [...groupsData];
+        let currentPage = 1;
+        let currentGroupPage = 1;
+        const itemsPerPage = 5;
+        let selectedStudent = null;
+        let selectedGroup = null;
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-menu button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'groups') {
+                renderGroupList();
+            }
+        }
+
+        // ============ 수강생 관리 함수 ============
+        function renderStudentList() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = filteredData.slice(startIndex, endIndex);
+
+            const container = document.getElementById('studentItems');
+            container.innerHTML = '';
+
+            pageData.forEach(student => {
+                const div = document.createElement('div');
+                div.className = `student-item ${selectedStudent?.id === student.id ? 'active' : ''}`;
+                div.innerHTML = `
+                    <div class="student-name">${student.name}</div>
+                    <div class="student-meta">${student.region} • ${student.gender} • ${student.age}세</div>
+                    <div class="student-capability">${student.capability}</div>
+                `;
+                div.onclick = () => selectStudent(student);
+                container.appendChild(div);
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '이전';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderStudentList();
+                }
+            };
+            paginationContainer.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = i === currentPage ? 'active' : '';
+                btn.style.background = i === currentPage ? '#2d9d4a' : 'white';
+                btn.style.color = i === currentPage ? 'white' : '#2d9d4a';
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderStudentList();
+                };
+                paginationContainer.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '다음';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderStudentList();
+                }
+            };
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function selectStudent(student) {
+            selectedStudent = student;
+            const managementSection = document.getElementById('managementSection');
+            managementSection.innerHTML = `
+                <div class="management-title">수강생 관리</div>
+
+                <div class="info-section">
+                    <div class="info-section-title">기본 정보</div>
+                    <div class="info-item">
+                        <div class="info-label">이름</div>
+                        <div class="info-value">${student.name}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">나이</div>
+                        <div class="info-value">${student.age}세</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">성별</div>
+                        <div class="info-value">${student.gender}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">지역</div>
+                        <div class="info-value">${student.region}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">전화번호</div>
+                        <div class="info-value">${student.phone}</div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">학습 정보</div>
+                    <div class="info-item">
+                        <div class="info-label">그룹 정보</div>
+                        <div class="info-value">${student.group}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">디지털 역량</div>
+                        <div class="info-value">${student.capability}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">담당 로디쌤</div>
+                        <div class="info-value">${student.teacher}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">선택 패키지</div>
+                        <select class="select-box">
+                            <option selected>${student.package} (${student.progress}회차)</option>
+                            <option>1:1 5회차 패키지</option>
+                            <option>1:1 8회차 패키지</option>
+                            <option>1:1 12회차 패키지</option>
+                            <option>그룹 10회차 패키지</option>
+                            <option>그룹 15회차 패키지</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="file-section">
+                    <div class="file-section-title">수업 관리</div>
+                    <div class="file-upload">
+                        <div class="file-input">📎 파일을 선택하거나 드래그하세요</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-action btn-report" onclick="printReport()">레포트 출력</button>
+                    <button class="btn-action btn-add" onclick="addStudent()">추가</button>
+                    <button class="btn-action btn-delete" onclick="deleteStudent()">삭제</button>
+                </div>
+            `;
+            renderStudentList();
+        }
+
+        function searchStudents() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                filteredData = studentsData.filter(student =>
+                    student.name.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                filteredData = [...studentsData];
+            }
+            currentPage = 1;
+            renderStudentList();
+        }
+
+        function resetSearch() {
+            document.getElementById('searchInput').value = '';
+            filteredData = [...studentsData];
+            selectedStudent = null;
+            currentPage = 1;
+            document.getElementById('managementSection').innerHTML = '<div class="empty-state">수강생을 선택해주세요</div>';
+            renderStudentList();
+        }
+
+        function printReport() {
+            if (selectedStudent) {
+                alert(`${selectedStudent.name} 수강생의 레포트를 출력합니다.`);
+            }
+        }
+
+        function addStudent() {
+            alert('새로운 수강생을 추가합니다.');
+        }
+
+        function deleteStudent() {
+            if (selectedStudent) {
+                if (confirm(`${selectedStudent.name} 수강생을 삭제하시겠습니까?`)) {
+                    const index = studentsData.findIndex(s => s.id === selectedStudent.id);
+                    if (index > -1) {
+                        studentsData.splice(index, 1);
+                        filteredData = [...studentsData];
+                        selectedStudent = null;
+                        currentPage = 1;
+                        document.getElementById('managementSection').innerHTML = '<div class="empty-state">수강생을 선택해주세요</div>';
+                        renderStudentList();
+                    }
+                }
+            }
+        }
+
+        // ============ 그룹 관리 함수 ============
+        function renderGroupList() {
+            const startIndex = (currentGroupPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = filteredGroups.slice(startIndex, endIndex);
+
+            const container = document.getElementById('groupItems');
+            container.innerHTML = '';
+
+            pageData.forEach(group => {
+                const div = document.createElement('div');
+                div.className = `student-item ${selectedGroup?.id === group.id ? 'active' : ''}`;
+                div.innerHTML = `
+                    <div class="student-name">${group.name}</div>
+                    <div class="student-meta">수강생 ${group.studentCount}명 • ${group.institution}</div>
+                    <div class="student-capability">${group.avgCapability}</div>
+                `;
+                div.onclick = () => selectGroup(group);
+                container.appendChild(div);
+            });
+
+            renderGroupPagination();
+        }
+
+        function renderGroupPagination() {
+            const totalPages = Math.ceil(filteredGroups.length / itemsPerPage);
+            const paginationContainer = document.getElementById('groupPagination');
+            paginationContainer.innerHTML = '';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '이전';
+            prevBtn.disabled = currentGroupPage === 1;
+            prevBtn.onclick = () => {
+                if (currentGroupPage > 1) {
+                    currentGroupPage--;
+                    renderGroupList();
+                }
+            };
+            paginationContainer.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = i === currentGroupPage ? 'active' : '';
+                btn.style.background = i === currentGroupPage ? '#2d9d4a' : 'white';
+                btn.style.color = i === currentGroupPage ? 'white' : '#2d9d4a';
+                btn.onclick = () => {
+                    currentGroupPage = i;
+                    renderGroupList();
+                };
+                paginationContainer.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '다음';
+            nextBtn.disabled = currentGroupPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentGroupPage < totalPages) {
+                    currentGroupPage++;
+                    renderGroupList();
+                }
+            };
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function selectGroup(group) {
+            selectedGroup = group;
+            const managementSection = document.getElementById('groupManagementSection');
+            
+            let studentsHtml = group.students.map(student => {
+                const studentData = studentsData.find(s => s.name === student.name);
+                return `
+                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="info-value">
+                            ${student.name} (${student.age}세, ${student.gender})
+                        </div>
+                        <button style="background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%); color: white; padding: 4px 10px; border: none; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; white-space: nowrap;" onclick="goToStudentDetail('${student.name}')">정보</button>
+                    </div>
+                `;
+            }).join('');
+
+            managementSection.innerHTML = `
+                <div class="management-title">그룹 관리</div>
+
+                <div class="info-section">
+                    <div class="info-section-title">기본 정보</div>
+                    <div class="info-item">
+                        <div class="info-label">수업 인원</div>
+                        <div class="info-value">${group.studentCount}명</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">평균 연령</div>
+                        <div class="info-value">${group.avgAge}세</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">교육 장소</div>
+                        <div class="info-value">${group.location}</div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-section-title">학습 정보</div>
+                    <div class="info-item">
+                        <div class="info-label">평균 역량</div>
+                        <div class="info-value">${group.avgCapability}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">이탈률</div>
+                        <div class="info-value">0%</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">수업 내용</div>
+                        <div class="info-value">문화생활 즐기기</div>
+                    </div>
+                </div>
+
+                <div class="file-section">
+                    <div class="file-section-title">수강생 관리</div>
+                    <div style="margin-bottom: 15px;">
+                        ${studentsHtml}
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-action btn-report" onclick="printGroupReport()">레포트 출력</button>
+                    <button class="btn-action btn-add" onclick="addGroup()">추가</button>
+                    <button class="btn-action btn-delete" onclick="deleteGroup()">삭제</button>
+                </div>
+            `;
+            renderGroupList();
+        }
+
+        function goToStudentDetail(studentName) {
+            const student = studentsData.find(s => s.name === studentName);
+            if (student) {
+                // 수강생 관리 탭으로 전환
+                document.querySelectorAll('.content-section').forEach(el => {
+                    el.classList.remove('active');
+                });
+                document.querySelectorAll('.sidebar-menu button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                document.getElementById('students').classList.add('active');
+                document.querySelector('.sidebar-menu button:first-child').classList.add('active');
+
+                // 수강생 선택
+                selectStudent(student);
+            }
+        }
+
+        function searchGroups() {
+            const searchTerm = document.getElementById('searchGroupInput').value.toLowerCase();
+            if (searchTerm) {
+                filteredGroups = groupsData.filter(group =>
+                    group.name.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                filteredGroups = [...groupsData];
+            }
+            currentGroupPage = 1;
+            renderGroupList();
+        }
+
+        function resetGroupSearch() {
+            document.getElementById('searchGroupInput').value = '';
+            filteredGroups = [...groupsData];
+            selectedGroup = null;
+            currentGroupPage = 1;
+            document.getElementById('groupManagementSection').innerHTML = '<div class="empty-state">그룹을 선택해주세요</div>';
+            renderGroupList();
+        }
+
+        function printGroupReport() {
+            if (selectedGroup) {
+                alert(`${selectedGroup.name} 그룹의 레포트를 출력합니다.`);
+            }
+        }
+
+        function addGroup() {
+            alert('새로운 그룹을 추가합니다.');
+        }
+
+        function deleteGroup() {
+            if (selectedGroup) {
+                if (confirm(`${selectedGroup.name} 그룹을 삭제하시겠습니까?`)) {
+                    const index = groupsData.findIndex(g => g.id === selectedGroup.id);
+                    if (index > -1) {
+                        groupsData.splice(index, 1);
+                        filteredGroups = [...groupsData];
+                        selectedGroup = null;
+                        currentGroupPage = 1;
+                        document.getElementById('groupManagementSection').innerHTML = '<div class="empty-state">그룹을 선택해주세요</div>';
+                        renderGroupList();
+                    }
+                }
+            }
+        }
+
+        // 초기 렌더링
+        renderStudentList();
+    </script>
+</body>
+</html>

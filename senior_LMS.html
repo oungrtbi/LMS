@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODILAB - 김순남</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .emerald-primary {
+            --color-emerald-500: #2d9d4a;
+            --color-emerald-600: #2d9d4a;
+            --color-teal-600: #3fb85e;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white border-b border-gray-200">
+        <div class="px-8 py-4 flex items-center gap-3">
+            <a href="main.html"><h1 class="text-2xl font-bold" style="color: #2d9d4a;">RODILAB</h1></a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <div class="h-32" style="background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);"></div>
+
+            <div class="px-8 py-8 relative">
+                <div class="flex gap-12">
+                    <div class="flex-1">
+                        <div class="flex items-end gap-4 mb-6">
+                            <div class="w-28 h-28 rounded-full" style="background: linear-gradient(135deg, #d0e8e4 0%, #b8ddd5 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-top: -70px; border: 4px solid white; flex-shrink: 0;">
+                                <span style="font-size: 50px;">👩</span>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-gray-900">김순남</h2>
+                                <p class="text-gray-600 text-sm">여성 • 72세 • 성남시 중원구</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 text-sm text-gray-600">
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold mb-1">가입일</p>
+                                <p class="text-gray-900 font-medium">2026-01-29</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold mb-1">현재 수강 패키지</p>
+                                <p class="text-gray-900 font-medium">1:1 8회차 패키지</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold mb-1">전화번호</p>
+                                <p class="text-gray-900 font-medium">010-1234-5678</p>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-gray-200 grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 font-semibold mb-2">기본 설정</p>
+                                    <div class="space-y-2 bg-gray-50 p-3 rounded">
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">밝기</p>
+                                            <div class="flex items-center gap-2">
+                                                <div class="flex-1 h-2 bg-gray-300 rounded-full overflow-hidden">
+                                                    <div class="h-full" style="background: #2d9d4a; width: 60%;"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">60%</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-600 mb-1">음량</p>
+                                            <div class="flex items-center gap-2">
+                                                <div class="flex-1 h-2 bg-gray-300 rounded-full overflow-hidden">
+                                                    <div class="h-full" style="background: #2d9d4a; width: 100%;"></div>
+                                                </div>
+                                                <span class="text-xs font-medium text-gray-700">최대</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-gray-500 font-semibold mb-2">핵심 니즈</p>
+                                    <div class="flex flex-col gap-2">
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">카카오톡 활용</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">네이버 지도</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">쿠팡 결제</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-1">
+                        <div class="rounded-lg p-8 h-full" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-left: 4px solid #2d9d4a;">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-8">학습 현황</h3>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start gap-8">
+                                    <div>
+                                        <p class="text-sm text-gray-600 font-medium mb-3">진도율</p>
+                                        <div class="relative w-32 h-32">
+                                            <svg class="w-full h-full" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+                                                <circle cx="50" cy="50" r="45" fill="none" stroke="#2d9d4a" stroke-width="8" stroke-dasharray="169.65 282.74" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                                            </svg>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <span class="text-2xl font-bold text-gray-900">60%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-sm text-gray-600 font-medium mb-3">다음 강의</p>
+                                        <div class="w-40 bg-yellow-50 border border-yellow-200 rounded-lg overflow-hidden">
+                                            <img src="images/1.jpeg" alt="다음 강의" class="w-full h-auto object-cover" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="text-sm text-gray-600 font-medium mb-3">디지털 역량</p>
+                                    <div class="inline-block px-4 py-2 rounded-full font-semibold text-white" style="background: #2d9d4a;">
+                                        초중급
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="border-b border-gray-200 px-8 flex gap-8 bg-gray-50">
+                <button onclick="showTab('all')" id="tab-all" class="py-4 px-2 border-b-2 font-semibold" style="border-color: #2d9d4a; color: #2d9d4a;">
+                    전체
+                </button>
+                <button onclick="showTab('strength-weakness')" id="tab-strength-weakness" class="py-4 px-2 border-b-2 border-transparent text-gray-600 font-semibold hover:text-gray-900 hover:border-gray-300">
+                    강약점
+                </button>
+                <button onclick="showTab('curriculum')" id="tab-curriculum" class="py-4 px-2 border-b-2 border-transparent text-gray-600 font-semibold hover:text-gray-900 hover:border-gray-300">
+                    커리 추천
+                </button>
+                <button onclick="showTab('teaching')" id="tab-teaching" class="py-4 px-2 border-b-2 border-transparent text-gray-600 font-semibold hover:text-gray-900 hover:border-gray-300">
+                    교수법
+                </button>
+                <button onclick="showTab('analysis')" id="tab-analysis" class="py-4 px-2 border-b-2 border-transparent text-gray-600 font-semibold hover:text-gray-900 hover:border-gray-300">
+                    오답 분석
+                </button>
+            </div>
+
+            <div class="p-8">
+                <div id="content-all" class="tab-content">
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">지난 수업 내용 요약</h3>
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                            <p class="text-gray-700 leading-relaxed">
+                                지난 수업에서는 스마트폰의 기본 제스처 및 터치 방식에 대해 학습했습니다. 
+                                화면을 누르기, 길게 누르기, 슬라이드 등의 기본 동작을 반복 연습했으며, 
+                                실제 카메라 앱을 열어 사진 촬영 기능까지 응용하여 시연했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">오답 데이터</h3>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-4">
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">S4-3</span>
+                                    <span class="text-gray-700">위젯 삭제</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">S12-5</span>
+                                    <span class="text-gray-700">카톡 친구 숨김</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">A2-3</span>
+                                    <span class="text-gray-700">AI로 글쓰기</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-8 pt-8 border-t border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-6">강점과 약점</h3>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke: #2d9d4a;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    강점
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                        <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="text-gray-700 font-medium">교육 시 높은 집중력</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                        <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="text-gray-700 font-medium">높은 복습률</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                        <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="text-gray-700 font-medium">망각 주기 짧음</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke: #d97706;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h8m-8-4h8m0 4h8m-8-4h8M6 12a6 6 0 100-12 6 6 0 000 12z"></path>
+                                    </svg>
+                                    약점
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #fef3f3 0%, #fee8e8 100%); border-color: #d97706;">
+                                        <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #d97706;">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="text-gray-700 font-medium">응용 능력 부족</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #fef3f3 0%, #fee8e8 100%); border-color: #d97706;">
+                                        <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #d97706;">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="text-gray-700 font-medium">질문 부족</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.669 0-3.218.51-4.5 1.385A7.968 7.968 0 009 4.804z"></path>
+                            </svg>
+                            커리 추천
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900 mb-3">기존 커리 기반 추천</p>
+                                <div class="p-4 rounded-lg border-l-4" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <h4 class="font-semibold text-gray-900 text-sm">키오스크</h4>
+                                        <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #dc2626;">우선 추천</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700">현재 수강 중인 카메라 활용을 보완하고, 고령층 필수 생활 기술 학습</p>
+                                    <p class="text-xs text-gray-500 mt-2">난이도: 초중급</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900 mb-3">새로운 커리 제작 추천</p>
+                                <div class="p-4 rounded-lg border-l-4" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <h4 class="font-semibold text-gray-900 text-sm">AI 활용 일상</h4>
+                                        <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #2563eb;">신규 개발</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700">스마트폰 기본기를 바탕으로 일상에서 AI 기술을 활용하는 방법 학습</p>
+                                    <p class="text-xs text-gray-500 mt-2">난이도: 초중급</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: #f59e0b;">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                            시니어에게 부합한 교수법
+                        </h3>
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">지켜야 할 교수법</h4>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                이 학습자는 높은 집중력과 복습률을 보이므로, 반복 학습을 통한 장기 기억 강화에 효과적입니다. 복습 스케줄을 체계적으로 제공하고, 질문 유도 기법을 통해 학습자의 적극성을 촉진해야 합니다. 또한 학습 내용을 실생활의 예시와 연결하여 실제 활용 능력을 높이는 것이 중요합니다.
+                            </p>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                            <h4 class="font-semibold text-gray-900 mb-3">피해야 할 교수법</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                빠른 진도로 인한 혼란을 야기하면 안 되며, 복잡한 설명 없이 단순 지시만 제공하는 것도 피해야 합니다. 일방적인 강의식 수업은 학습자의 응용 능력 부족을 심화시킬 수 있으므로, 상호작용적인 수업 방식이 필요합니다. 특히 자신감 저하를 야기하는 질책은 절대 금물입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-strength-weakness" class="tab-content hidden">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke: #2d9d4a;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        강약점
+                    </h3>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">강점</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-700 font-medium">교육 시 높은 집중력</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-700 font-medium">높은 복습률</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-700 font-medium">망각 주기 짧음</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">약점</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #fef3f3 0%, #fee8e8 100%); border-color: #d97706;">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #d97706;">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-700 font-medium">응용 능력 부족</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 rounded-lg border" style="background: linear-gradient(135deg, #fef3f3 0%, #fee8e8 100%); border-color: #d97706;">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #d97706;">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-700 font-medium">질문 부족</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-curriculum" class="tab-content hidden">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: #2d9d4a;">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.669 0-3.218.51-4.5 1.385A7.968 7.968 0 009 4.804z"></path>
+                        </svg>
+                        커리 추천
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900 mb-3">기존 커리 기반 추천</p>
+                            <div class="p-4 rounded-lg border-l-4 mb-3" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900 text-sm">키오스크</h4>
+                                    <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #dc2626;">1순위</span>
+                                </div>
+                                <p class="text-sm text-gray-700">현재 수강 중인 카메라 활용을 보완하고, 고령층 필수 생활 기술 학습</p>
+                                <p class="text-xs text-gray-500 mt-2">난이도: 초중급</p>
+                            </div>
+                            <div class="p-4 rounded-lg border-l-4" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900 text-sm">모바일 결제</h4>
+                                    <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #2563eb;">2순위</span>
+                                </div>
+                                <p class="text-sm text-gray-700">핵심 니즈인 모바일 결제를 마스터하기 위한 심화 과정</p>
+                                <p class="text-xs text-gray-500 mt-2">난이도: 초중급</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900 mb-3">새로운 커리 제작 추천</p>
+                            <div class="p-4 rounded-lg border-l-4 mb-3" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900 text-sm">AI 활용 일상</h4>
+                                    <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #2563eb;">1순위</span>
+                                </div>
+                                <p class="text-sm text-gray-700">스마트폰 기본기를 바탕으로 일상에서 AI 기술을 활용하는 방법 학습</p>
+                                <p class="text-xs text-gray-500 mt-2">난이도: 초중급</p>
+                            </div>
+                            <div class="p-4 rounded-lg border-l-4" style="background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%); border-color: #2d9d4a;">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900 text-sm">디지털 건강관리</h4>
+                                    <span class="text-xs font-bold text-white px-2 py-1 rounded" style="background: #2563eb;">2순위</span>
+                                </div>
+                                <p class="text-sm text-gray-700">스마트폰을 통한 건강 관리 앱 활용법 및 의료 기관 온라인 예약 방법</p>
+                                <p class="text-xs text-gray-500 mt-2">난이도: 초급</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-teaching" class="tab-content hidden">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style="color: #f59e0b;">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        시니어에게 부합한 교수법
+                    </h3>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">지켜야 할 교수법</h4>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            이 학습자는 높은 집중력과 복습률을 보이므로, 반복 학습을 통한 장기 기억 강화에 효과적입니다. 복습 스케줄을 체계적으로 제공하고, 질문 유도 기법을 통해 학습자의 적극성을 촉진해야 합니다. 또한 학습 내용을 실생활의 예시와 연결하여 실제 활용 능력을 높이는 것이 중요합니다.
+                        </p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">피해야 할 교수법</h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            빠른 진도로 인한 혼란을 야기하면 안 되며, 복잡한 설명 없이 단순 지시만 제공하는 것도 피해야 합니다. 일방적인 강의식 수업은 학습자의 응용 능력 부족을 심화시킬 수 있으므로, 상호작용적인 수업 방식이 필요합니다. 특히 자신감 저하를 야기하는 질책은 절대 금물입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="content-analysis" class="tab-content hidden">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">오답 데이터</h3>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">S4-3</span>
+                                <span class="text-gray-700">위젯 삭제</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">S12-5</span>
+                                <span class="text-gray-700">카톡 친구 숨김</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">A2-3</span>
+                                <span class="text-gray-700">AI로 글쓰기</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">오답 원인 분석</h3>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="text-blue-600 font-bold mt-1">•</span>
+                                <span class="text-gray-700">위젯 삭제는 오래 누르는 제스처가 필요한데, 이 부분을 놓쳤을 가능성이 높음</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-blue-600 font-bold mt-1">•</span>
+                                <span class="text-gray-700">카톡에서 찾기 어려운 '친구 목록 > 옵션' 메뉴 위치 인식 부족</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-blue-600 font-bold mt-1">•</span>
+                                <span class="text-gray-700">AI 활용이 아직 생소한 기능으로, 접근 방법 이해도 낮음</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-blue-600 font-bold mt-1">•</span>
+                                <span class="text-gray-700">메뉴 탐색 시 글자 크기가 작아서 찾기 어려움</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-blue-600 font-bold mt-1">•</span>
+                                <span class="text-gray-700">응용 단계의 문제로, 단순 따라하기를 벗어난 상황에서 어려움을 겪음</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Remove active state from all tabs
+            document.querySelectorAll('[id^="tab-"]').forEach(el => {
+                el.classList.remove('border-b-2');
+                el.style.borderColor = 'transparent';
+                el.classList.add('border-transparent', 'text-gray-600');
+                el.style.color = '#666';
+            });
+
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            
+            // Add active state to clicked tab
+            const tabBtn = document.getElementById('tab-' + tabName);
+            tabBtn.classList.remove('border-transparent', 'text-gray-600');
+            tabBtn.style.borderBottomColor = '#2d9d4a';
+            tabBtn.style.color = '#2d9d4a';
+        }
+    </script>
+</body>
+</html>

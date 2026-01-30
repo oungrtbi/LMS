@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RODILAB - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f5f7f6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(45, 157, 74, 0.1);
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0px;
+            font-style: normal;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #2d9d4a;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f8f6;
+            padding-left: 25px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Dashboard Title */
+        .dashboard-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2d9d4a;
+        }
+
+        /* Customer Graph Section */
+        .graph-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border-left: 5px solid #2d9d4a;
+        }
+
+        .graph-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        /* Top Chapters Section */
+        .top-chapters-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border-left: 5px solid #2d9d4a;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 20px;
+        }
+
+        .top-chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .chapter-card {
+            background: linear-gradient(135deg, #f0f8f6 0%, #e8f3f0 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #2d9d4a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(45, 157, 74, 0.15);
+        }
+
+        .chapter-rank {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2d9d4a;
+            margin-bottom: 10px;
+        }
+
+        .chapter-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Senior Profile Section */
+        .senior-profile-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #2d9d4a;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d9d4a;
+        }
+
+        /* Search Box */
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #2d9d4a;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 157, 74, 0.1);
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background: #f0f8f6;
+            border-bottom: 2px solid #2d9d4a;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2d9d4a;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fdf9;
+        }
+
+        td {
+            padding: 15px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d0e8e4 0%, #b8ddd5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #2d9d4a;
+            margin-bottom: 2px;
+        }
+
+        .profile-meta {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .progress-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2d9d4a 0%, #3fb85e 100%);
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: #2d9d4a;
+            font-weight: 600;
+        }
+
+        .capability {
+            padding: 4px 8px;
+            background: #f0f8f6;
+            color: #2d9d4a;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            width: fit-content;
+        }
+
+        /* Button Group */
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-lms {
+            background: linear-gradient(135deg, #2d9d4a 0%, #3fb85e 100%);
+            color: white;
+        }
+
+        .btn-lms:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(45, 157, 74, 0.3);
+        }
+
+        .btn-lxp {
+            background: white;
+            color: #2d9d4a;
+            border: 1px solid #2d9d4a;
+        }
+
+        .btn-lxp:hover {
+            background: #2d9d4a;
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .pagination button, .pagination span {
+            padding: 8px 12px;
+            border: 1px solid #2d9d4a;
+            background: white;
+            color: #2d9d4a;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button.active, .pagination button:hover {
+            background: #2d9d4a;
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination span {
+            border: none;
+            cursor: default;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .top-chapters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .table-wrapper {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn">☰</button>
+            <a href="main.html" class="logo">RODILAB</a>
+        </div>
+    </header>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="main.html">Dashboard</a>
+        <a href="admin.html">관리자 메뉴</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="dashboard-title">Dashboard</h2>
+
+        <!-- Customer Graph Section -->
+        <div class="graph-section">
+            <h3 class="graph-title">고객 수 그래프</h3>
+            <div class="chart-container">
+                <canvas id="customerChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Top Chapters Section -->
+        <div class="top-chapters-section">
+            <h3 class="section-title">인기 회차</h3>
+            <div class="top-chapters-grid">
+                <div class="chapter-card">
+                    <div class="chapter-rank">1위</div>
+                    <div class="chapter-name">AI 활용의 기초</div>
+                </div>
+                <div class="chapter-card">
+                    <div class="chapter-rank">2위</div>
+                    <div class="chapter-name">SNS 활용 마스터</div>
+                </div>
+                <div class="chapter-card">
+                    <div class="chapter-rank">3위</div>
+                    <div class="chapter-name">스마트폰 기본 사용법</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Senior Profile Section -->
+        <div class="senior-profile-section">
+            <div class="profile-header">
+                <h3 class="profile-title">Senior Profile</h3>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="이름이나 나이로 검색...">
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="profileTable">
+                    <thead>
+                        <tr>
+                            <th>프로필</th>
+                            <th>나이</th>
+                            <th>성별</th>
+                            <th>가입일시</th>
+                            <th>그룹</th>
+                            <th>패키지</th>
+                            <th>진도율</th>
+                            <th>디지털 역량</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profileTableBody">
+                        <!-- 동적으로 생성됨 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- 동적으로 생성됨 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // 더미 데이터
+        const seniorsData = [
+            {
+                name: '김순남',
+                age: 72,
+                gender: '여자',
+                joinDate: '2026-01-29',
+                group: '그룹 없음',
+                package: '1:1 8회차 패키지',
+                progress: 70,
+                capability: '초중금',
+                emoji: '👩'
+            },
+            {
+                name: '박영호',
+                age: 68,
+                gender: '남자',
+                joinDate: '2026-01-15',
+                group: '3조',
+                package: '그룹 10회차 패키지',
+                progress: 85,
+                capability: '초급',
+                emoji: '👴'
+            },
+            {
+                name: '이미영',
+                age: 75,
+                gender: '여자',
+                joinDate: '2026-01-10',
+                group: '그룹 없음',
+                package: '1:1 5회차 패키지',
+                progress: 45,
+                capability: '초급',
+                emoji: '👩‍🦳'
+            },
+            {
+                name: '정수진',
+                age: 70,
+                gender: '남자',
+                joinDate: '2026-01-20',
+                group: '1조',
+                package: '그룹 10회차 패키지',
+                progress: 60,
+                capability: '초중급',
+                emoji: '👨‍🦳'
+            },
+            {
+                name: '최연희',
+                age: 73,
+                gender: '여자',
+                joinDate: '2026-01-05',
+                group: '2조',
+                package: '1:1 8회차 패키지',
+                progress: 50,
+                capability: '초급',
+                emoji: '👩'
+            },
+            {
+                name: '문성배',
+                age: 71,
+                gender: '남자',
+                joinDate: '2026-01-25',
+                group: '그룹 없음',
+                package: '그룹 10회차 패키지',
+                progress: 75,
+                capability: '초중급',
+                emoji: '👨'
+            },
+            {
+                name: '이순희',
+                age: 76,
+                gender: '여자',
+                joinDate: '2026-01-12',
+                group: '1조',
+                package: '1:1 5회차 패키지',
+                progress: 55,
+                capability: '초급',
+                emoji: '👩‍🦳'
+            },
+            {
+                name: '김동진',
+                age: 69,
+                gender: '남자',
+                joinDate: '2026-01-08',
+                group: '그룹 없음',
+                package: '그룹 10회차 패키지',
+                progress: 90,
+                capability: '초중금',
+                emoji: '👨‍🦳'
+            },
+            {
+                name: '박미옥',
+                age: 74,
+                gender: '여자',
+                joinDate: '2026-01-22',
+                group: '3조',
+                package: '1:1 8회차 패키지',
+                progress: 65,
+                capability: '초급',
+                emoji: '👩'
+            },
+            {
+                name: '유은희',
+                age: 70,
+                gender: '여자',
+                joinDate: '2026-01-18',
+                group: '2조',
+                package: '그룹 10회차 패키지',
+                progress: 80,
+                capability: '초중급',
+                emoji: '👩‍🦳'
+            },
+            {
+                name: '김종환',
+                age: 72,
+                gender: '남자',
+                joinDate: '2026-01-28',
+                group: '그룹 없음',
+                package: '1:1 5회차 패키지',
+                progress: 40,
+                capability: '초급',
+                emoji: '👨'
+            },
+            {
+                name: '정미경',
+                age: 67,
+                gender: '여자',
+                joinDate: '2026-01-09',
+                group: '1조',
+                package: '그룹 10회차 패키지',
+                progress: 88,
+                capability: '초중급',
+                emoji: '👩‍🦳'
+            }
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 4;
+        let filteredData = [...seniorsData];
+
+        // 메뉴 토글
+        const menuBtn = document.getElementById('menuBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        menuBtn.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+
+        // 고객 수 그래프
+        const ctx = document.getElementById('customerChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1월 1일', '1월 5일', '1월 10일', '1월 15일', '1월 20일', '1월 25일', '1월 29일'],
+                datasets: [
+                    {
+                        label: '현재 고객 수',
+                        data: [2, 3, 3, 4, 4, 4, 4],
+                        borderColor: '#2d9d4a',
+                        backgroundColor: 'rgba(45, 157, 74, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#2d9d4a',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 7
+                    },
+                    {
+                        label: '누적 고객 수',
+                        data: [2, 4, 5, 7, 8, 9, 10],
+                        borderColor: '#3fb85e',
+                        backgroundColor: 'rgba(63, 184, 94, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#3fb85e',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 7
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            },
+                            color: '#333'
+                        }
+                    },
+                    filler: {
+                        propagate: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 12,
+                        ticks: {
+                            color: '#888',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#888',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // 테이블 렌더링 함수
+        function renderTable(data, page) {
+            const tableBody = document.getElementById('profileTableBody');
+            tableBody.innerHTML = '';
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = data.slice(startIndex, endIndex);
+
+            pageData.forEach(senior => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="profile-info">
+                            <div class="profile-avatar">${senior.emoji}</div>
+                            <div class="profile-details">
+                                <div class="profile-name">${senior.name}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${senior.age}세</td>
+                    <td>${senior.gender}</td>
+                    <td>${senior.joinDate}</td>
+                    <td>${senior.group}</td>
+                    <td>${senior.package}</td>
+                    <td>
+                        <div class="progress-cell">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${senior.progress}%;"></div>
+                            </div>
+                            <div class="progress-text">${senior.progress}%</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="capability">${senior.capability}</div>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="senior_LMS.html" class="btn-small btn-lms">LMS</a>
+                            <a href="senior_LXP.html" class="btn-small btn-lxp">LXP</a>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            renderPagination(data.length);
+        }
+
+        // 페이지네이션 렌더링
+        function renderPagination(totalItems) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            // 이전 버튼
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '이전';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable(filteredData, currentPage);
+                }
+            });
+            pagination.appendChild(prevBtn);
+
+            // 페이지 번호
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = i === currentPage ? 'active' : '';
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable(filteredData, currentPage);
+                });
+                pagination.appendChild(pageBtn);
+            }
+
+            // 다음 버튼
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '다음';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable(filteredData, currentPage);
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // 검색 기능
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filteredData = seniorsData.filter(senior => 
+                senior.name.toLowerCase().includes(searchTerm) ||
+                senior.age.toString().includes(searchTerm)
+            );
+            currentPage = 1;
+            renderTable(filteredData, currentPage);
+        });
+
+        // 초기 렌더링
+        renderTable(filteredData, currentPage);
+    </script>
+</body>
+</html>
